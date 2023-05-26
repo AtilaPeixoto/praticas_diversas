@@ -17,4 +17,3 @@ pixelated_img = cv2.resize(
 
 cv2.imshow('img Pixelizada', pixelated_img)
 cv2.waitKey(0)
-#cv2.destroyAllWindows()

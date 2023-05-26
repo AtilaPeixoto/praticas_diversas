@@ -1,6 +1,6 @@
 import openai
 
-openai.api_key = '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'
+openai.api_key = ''
 f = 2
 response = openai.Image.create(
     prompt ='',

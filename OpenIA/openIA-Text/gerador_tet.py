@@ -1,5 +1,5 @@
 import requests
-api_key = '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'
+api_key = ''
 endpoint = 'https://api.openai.com/v1/engines/davince/completions'
 
 # definir o text de entrada e as configuraçoes do modelo
