@@ -1,0 +1,10 @@
+[{pergunta:resposta}[respostas]]
+certa = value.dicionaria
+listaa.append(certa)
+choice----embaralhar
+for lista i in lista:
+	btn[i] = i
+if btn == value.dict:
+	certo
+else 
+	errado
