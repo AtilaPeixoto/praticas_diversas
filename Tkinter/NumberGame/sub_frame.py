@@ -1,28 +1,12 @@
 from tkinter import *
 from random import randint
-
-class Contador(Frame):
-    def __init__(self, master=None, *x):
-        super().__init__(master=master, *x)
-        
-        self.cont = IntVar()
-        lbl_contador = Label(self, text='Numero de Tentativas: ')
-        lbl_valor = Label(self, textvariable=self.cont)
-        
-        self.contvitorias = IntVar()
-        lbl_contadorVic = Label(self, text='Numero de Vitorias: ')
-        lbl_valorV = Label(self, textvariable=self.contvitorias)
-        
-        lbl_contadorVic.grid(row=0, column=0)
-        lbl_valorV.grid(row=0, column=1, columnspan=2)
-        
-        lbl_contador.grid(row=0, column=4)
-        lbl_valor.grid(row=0, column=5, columnspan=2)
+from sub_frame2 import *
 
 
 class Jogando(Frame):
-    def __init__(self, x):
+    def __init__(self, x, contador):
         super().__init__()
+        self.contador = contador 
         self['bd'] = 2
         self['relief'] = 'solid'
         
@@ -64,14 +48,14 @@ class Jogando(Frame):
     def executar(self):
         bot = self.sortear()
         if self.validacao(): 
-            jogador = self.mostrar_numero_escolhido()
+            jogador = self.pegar_numero()
             if jogador > bot:
                 self.falar.set(self.lista_maior_menor[1])
             elif jogador < bot:
                 self.falar.set(self.lista_maior_menor[0])
             elif jogador == bot:
                 self.n_bot = 0
-                frame_contador.contvitorias.set(frame_contador.contvitorias.get() +1 )
+                self.contador.contar_vitorias()
                 self.falar.set(self.lista_maior_menor[2])
         else:
             self.falar.set(self.lista_maior_menor[3])
@@ -86,27 +70,9 @@ class Jogando(Frame):
         else:
             self.n_bot = self.n_bot
             return self.n_bot
-        print(self.n_bot)
         
         
+    def pegar_numero(self):
+        self.contador.contar()
+        return int(self.numero_jogador.get())    
         
-    def mostrar_numero_escolhido(self):
-        frame_contador.cont.set(frame_contador.cont.get() + 1)
-        return int(self.numero_jogador.get())
-            
-   
-janela = Tk()
-janela.title('Jogo')
-janela.geometry('500x300')
-
-
-
-frame_contador = Contador(janela)
-frame_contador.grid(row=0, column=0, columnspan=2)
-
-
-
-sub_1 = Jogando(janela)
-sub_1.grid(row=1, column=0, rowspan=4, columnspan=4, padx=50, pady=50, )
-
-janela.mainloop()
