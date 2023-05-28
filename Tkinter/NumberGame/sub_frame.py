@@ -9,7 +9,8 @@ class Jogando(Frame):
         self.contador = contador 
         
         self.s = style
-        self.tema = self.s.theme_use('clam')
+        self.tema = self.s.theme_use('vista')
+        # ('winnative', 'clam', 'alt', 'default', 'classic', 'vista', 'xpnative')
         self.fundo = self.s.lookup('self.tema', 'background')
         
         self['bd'] = 2
