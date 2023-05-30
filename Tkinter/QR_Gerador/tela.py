@@ -1,17 +1,17 @@
-from tkinter import Tk
+import tkinter as tk
 from frame1 import Gerador
 
 
-window = Tk()
-window.title('QRcode Gerador')
-# window.geometry('200x200')
+janela = tk.Tk()
+janela.title('QRcode Gerador')
+
+janela.iconbitmap(r'img\\a2.ico')
 
 
-            
     
-g = Gerador(window)
+g = Gerador(janela)
 g.grid()
 
 
 
-window.mainloop()
+janela.mainloop()
