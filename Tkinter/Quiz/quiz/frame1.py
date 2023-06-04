@@ -50,7 +50,6 @@ class Jogo(Frame):
         self.lbl_pergunta.config(text=self.sorteio[0])
         self.certa = self.sorteio[1]
         self.opcoes = self.sorteio[2]
-        print(self.opcoes)
         random.shuffle(self.opcoes)
         self.indice = self.opcoes.index(self.certa) +1
         for i in range(4):
