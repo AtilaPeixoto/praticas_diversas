@@ -18,32 +18,30 @@ class Jogo(Frame):
         self.inicio.grid()
         
         frame_borda = Frame(self, height=100, width=200)
-        self.lbl_pergunta = ttk.Label(frame_borda, text='')
-        
-        frame_borda.grid(padx=50, pady=25, ipady=10, ipadx=5)
-        self.lbl_pergunta.grid(row=0)
+        frame_borda.grid(padx=50, pady=25, ipady=10)
         frame_borda.grid_propagate(0)
+        self.lbl_pergunta = ttk.Label(frame_borda, text='')
+        self.lbl_pergunta.grid(row=0)
         
         self.lista_btn = []    
         for i in range(1, 5):
-            btn_respostas = ttk.Button(frame_borda, text='respostas', width=30, command=lambda index=i: self.verificar(index))
+            btn_respostas = ttk.Button(frame_borda, text='', width=30, command=lambda index=i: self.verificar(index))
             self.lista_btn.append(btn_respostas)
             btn_respostas.grid(row=i)
             
-            
-            
+        
             
     def verificar(self, index):
         print(index, self.indice)
         if index == self.indice:
             self.msg = 'Parabens'
+            self['bg'] = 'green'
             print('parabens')
         else:
             self.msg = 'Errado. Desejo mais sorte'
+            self['bg'] = 'red'
             print('errado')
       
-       
-        
             
     def start(self):
         self.sorteio = random.choice(perguntas1)
@@ -57,7 +55,5 @@ class Jogo(Frame):
       
  
             
-    def zerar(self):
-        for i in range(4):
-            self.lista_btn[i].config(text='vazio')
+
             

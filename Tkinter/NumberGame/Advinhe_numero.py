@@ -9,7 +9,7 @@ janela = Tk()
 janela.title('Jogo')
 janela.geometry('500x300')
 
-
+janela.iconbitmap('img/a2.ico')
 
 contador = Contador(janela)
 contador.grid(row=0, column=0, columnspan=2)
