@@ -1,4 +1,4 @@
-from tkinter import ttk
+from tkinter import ttk, END
 from random import randint
 from sub_frame2 import *
 
@@ -34,19 +34,19 @@ class Jogando(Frame):
         
         
         lbl = ttk.Label(borda_frame, text='Escolha um número! \nTente a sua sorte!!!')
-        self.campo_numero = ttk.Entry(borda_frame, textvariable=self.numero_jogador)
+        self.campo_numero = ttk.Entry(borda_frame, textvariable=self.numero_jogador, width=5)
         self.btn = ttk.Button(borda_frame, text='Jogar', command=self.executar)
         lbl_resposta = ttk.Label(borda_frame, textvariable=self.falar, anchor='center', justify='center', width=30)
         
        
         
-        lbl.grid(row=1, column=1, padx=70, pady=10)
-        self.campo_numero.grid(row=2, column=1, padx=70, pady=10)
+        lbl.grid(row=1, column=0, padx=70, pady=10)
+        self.campo_numero.grid(row=2, column=0, padx=70, pady=10)
         self.campo_numero.bind('<Return>', lambda event:self.executar())
         self.campo_numero.focus()
         
-        self.btn.grid(row=3, column=1, pady=10, padx=70)
-        lbl_resposta.grid(row=4, column=1, padx=70)
+        self.btn.grid(row=3, column=0, pady=10, padx=70)
+        lbl_resposta.grid(row=4, column=0, padx=70)
         borda_frame.grid(padx=50, pady=5, ipady=5, ipadx=10)
         
         
@@ -59,23 +59,27 @@ class Jogando(Frame):
             return False
         
 
-    
     def executar(self):
-        bot = self.sortear()
+        self.contador.listar_jogados(self.numero_jogador.get())
         if self.validacao(): 
-            jogador = self.pegar_numero()
-            if jogador > bot:
-                self.falar.set(self.lista_maior_menor[1])
-            elif jogador < bot:
-                self.falar.set(self.lista_maior_menor[0])
-            elif jogador == bot:
-                self.n_bot = 0
-                self.contador.contar_vitorias()
-                self.falar.set(self.lista_maior_menor[2])
+            self.responder()
         else:
             self.falar.set(self.lista_maior_menor[3])
         self.campo_numero.focus()
         
+        
+    def responder(self):
+        bot = self.sortear()
+        jogador = self.pegar_numero()
+        self.campo_numero.delete(0, END)
+        if jogador > bot:
+            self.falar.set(self.lista_maior_menor[1])
+        elif jogador < bot:
+            self.falar.set(self.lista_maior_menor[0])
+        elif jogador == bot:
+            self.n_bot = 0
+            self.contador.contar_vitorias()
+            self.falar.set(self.lista_maior_menor[2])
         
         
     def sortear(self):

@@ -7,7 +7,7 @@ from sub_frame2 import *
    
 janela = Tk()
 janela.title('Jogo')
-janela.geometry('500x300')
+# janela.geometry('500x300')
 
 janela.iconbitmap('img/a2.ico')
 
