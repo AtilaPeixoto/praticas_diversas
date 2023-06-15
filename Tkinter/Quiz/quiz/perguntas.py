@@ -1,7 +1,6 @@
 from tkinter import Tk, Frame, ttk
 from tkinter import *
-
-
+import pickle
 
 class Questoes(Frame):
     def __init__(self, *x):
@@ -19,12 +18,12 @@ class Questoes(Frame):
         self.opcao3 = ttk.Entry(self, text='')    
         self.genero = ttk.Combobox(self)
         self.genero['values'] = ('Matematica',
-                                 'Português',
+                                 'Portugues',
                                  'Historia',
                                  'Geografia',
                                  'Conhecimentos Gerais',
                                  'Biologia',
-                                 'Química',
+                                 'Quimica',
                                  )
         self.enviar = ttk.Button(self, text='Salvar', command=self.salvar)
         
@@ -36,24 +35,57 @@ class Questoes(Frame):
         self.opcao1.grid()
         self.opcao2.grid()
         self.opcao3.grid()
-        self.enviar.grid()
         self.lbl_genero.grid()
         self.genero.grid()
+        self.enviar.grid()
         
         
     def salvar(self):
-        pergunta = self.pergunta.get()
-        resposta = self.certa.get()
-        opcao1 = self.opcao1.get()
-        opcao2 = self.opcao2.get()
-        opcao3 = self.opcao3.get() 
-        with open('perguntas.txt', 'a') as f:
-                banco_perguntas = f.write(f'{pergunta}; {resposta}; {opcao1}; {opcao2}; {opcao3} \n')
-                
-                
+        self.coletar(self) 
+        self.tipificar(self)  
+        
+        
+    def coletar(self, *x):
+        self.questao = []
+        self.questao_opcoes = []
+        self.questao.append(self.pergunta.get())
+        self.questao.append(self.certa.get())
+        self.questao_opcoes.append(self.opcao1.get())
+        self.questao_opcoes.append(self.opcao2.get())
+        self.questao_opcoes.append(self.opcao3.get())
+        self.questao_opcoes.append(self.certa.get())
+        self.questao.append(self.questao_opcoes[:])
+        self.materia = self.genero.get()
+       
+        
+    def tipificar(self, *x):
+        if self.materia == 'Matematica':
+            self.escrever(self, nome='Matematica')
+        if self.materia == 'Portugues':
+            self.escrever(self, nome='Portugues')
+        if self.materia == 'Historia':
+            self.escrever(self, nome='Historia')
+        if self.materia == 'Quimica':
+            self.escrever(self, nome='Quimica')
+        if self.materia == 'Biologia':
+           self.escrever(self, nome='Biologia')
+        if self.materia == 'Geografia':
+            self.escrever(self, nome='Geografia')
+        if self.materia == 'Gerais':
+            self.escrever(self, nome='Gerais')
+            
+    
+    def escrever(self, *x, nome=''):
+        try:
+            with open('perguntas/'+ nome +'.txt', 'a') as f:
+                f.writelines(f'{str(self.questao)} \n')
+        except:     
+            with open('perguntas/'+ nome + '.txt', 'x') as f:
+                f.writelines(f'{str(self.questao)} \n')
+    
    
         
-                
+
 a = Questoes()
 a.grid()
 
