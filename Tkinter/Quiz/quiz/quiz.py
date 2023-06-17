@@ -3,7 +3,7 @@ from frame1 import *
 
 janela = Tk()
 janela.title('Quiz ')
-janela.geometry('500x500')
+janela.geometry('600x500')
 
 
 

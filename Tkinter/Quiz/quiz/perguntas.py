@@ -1,6 +1,6 @@
 from tkinter import Tk, Frame, ttk
 from tkinter import *
-import pickle
+
 
 class Questoes(Frame):
     def __init__(self, *x):
@@ -77,10 +77,10 @@ class Questoes(Frame):
     
     def escrever(self, *x, nome=''):
         try:
-            with open('perguntas/'+ nome +'.txt', 'a') as f:
+            with open(f'perguntas/{nome}.txt', 'a') as f:
                 f.writelines(f'{str(self.questao)} \n')
         except:     
-            with open('perguntas/'+ nome + '.txt', 'x') as f:
+            with open(f'perguntas/{nome}.txt', 'x') as f:
                 f.writelines(f'{str(self.questao)} \n')
     
    
